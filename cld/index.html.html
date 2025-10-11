@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Tareas</title>
+    <!-- Enlace al archivo CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Gestión de Tareas</h1>
+
+    <table id="taskTable">
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>item</th>
+                <th>Fecha de inicio</th>
+                <th>Fecha de vencimiento</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Fila de ejemplo -->
+            <tr>
+                <td><input type="text" value="Proyecto X" class="input-text"></td>
+                <td><input type="text" value="Juan Pérez" class="input-text"></td>
+                <td><input type="date" value="2025-09-01" class="input-text"></td>
+                <td><input type="date" value="2025-10-31" class="input-text date-input"></td>
+                <td class="actions">
+                    <button class="change-date-btn">Cambiar fecha</button>
+                    <button class="delete-row-btn">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="add-row-btn">Agregar nueva celda</button>
+</div>
+
+<!-- Enlace al archivo JavaScript -->
+<script src="script.js"></script>
+
+</body>
+</html>
