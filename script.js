@@ -80,3 +80,66 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+document.addEventListener('DOMContentLoaded', () => {
+    const taskTableBody = document.getElementById('taskTable').querySelector('tbody');
+    const addRowBtn = document.querySelector('.add-row-btn');
+
+    function addRow() {
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td><input type="text" class="input-text"></td>
+            <td><input type="text" class="input-text"></td>
+            <td><input type="date" class="input-text"></td>
+            <td><input type="date" class="input-text date-input"></td>
+            <td class="actions">
+                <button class="change-date-btn">Cambiar fecha</button>
+                <button class="delete-row-btn">Eliminar</button>
+            </td>
+        `;
+        taskTableBody.appendChild(newRow);
+        checkDates();
+    }
+
+    function checkDates() {
+        const today = new Date().toISOString().slice(0, 10);
+        const dateInputs = document.querySelectorAll('.date-input');
+
+        dateInputs.forEach(input => {
+            const row = input.closest('tr');
+            if (input.value && input.value < today) {
+                row.classList.add('expired');
+            } else {
+                row.classList.remove('expired');
+            }
+        });
+    }
+    
+    taskTableBody.addEventListener('click', (e) => {
+        const row = e.target.closest('tr');
+        
+        if (e.target.classList.contains('change-date-btn')) {
+            const dateInput = row.querySelector('.date-input');
+            const newDate = prompt("Introduce la nueva fecha de vencimiento (YYYY-MM-DD):", dateInput.value);
+            if (newDate) {
+                dateInput.value = newDate;
+                checkDates();
+            }
+        }
+        
+        if (e.target.classList.contains('delete-row-btn')) {
+            if (confirm('¿Estás seguro de que quieres eliminar esta tarea?')) {
+                row.remove();
+            }
+        }
+    });
+    
+    addRowBtn.addEventListener('click', addRow);
+    
+    taskTableBody.addEventListener('change', (e) => {
+        if (e.target.classList.contains('date-input')) {
+            checkDates();
+        }
+    });
+    
+    checkDates();
+});
